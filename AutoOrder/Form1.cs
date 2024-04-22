@@ -23,9 +23,11 @@ namespace AutoOrder
         private void button1_Click(object sender, EventArgs e)
         {
             _driver = InitChrome(false);
-            var url = txtUrl.Text;
-            _driver.Navigate().GoToUrl(url);
+            var SONumber = txtUrl.Text;
+            _driver.Navigate().GoToUrl("https://www.google.com.vn/");
             _driver.Manage().Window.Maximize();
+            var js = (IJavaScriptExecutor) _driver;
+            js.ExecuteScript($@"document.getElementsByTagName('textarea')[0].value = '{SONumber}'");
         }
         private static ChromeDriver InitChrome(bool headless = true)
         {
