@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -28,6 +29,12 @@ namespace AutoOrder
             _driver.Manage().Window.Maximize();
             var js = (IJavaScriptExecutor) _driver;
             js.ExecuteScript($@"document.getElementsByTagName('textarea')[0].value = '{SONumber}'");
+            Thread.Sleep(1000);
+            SendKeys.Send(@"{Enter}");
+            Thread.Sleep(1000);
+            js.ExecuteScript($@"document.querySelectorAll('a[jsname=UWckNb]')[0].click()");
+            Thread.Sleep(1000);
+            js.ExecuteScript($@"document.querySelectorAll('a[href*=tin-tuc-trong-ngay]')[0].click()");
         }
         private static ChromeDriver InitChrome(bool headless = true)
         {
